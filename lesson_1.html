@@ -1,0 +1,28 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 1</title>
+</head>
+
+<body>
+  <h1>Lesson 1</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>
+    <p>{{greeting}} {{name}}!</p>
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+    var ractive = new Ractive({
+
+      el: '#container',
+      template: '#template',
+
+      data: { greeting: 'Hello', name: 'world' }
+    });
+  </script>
+</body>
+</html>

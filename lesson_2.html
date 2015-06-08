@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 2</title>
+</head>
+
+<body>
+  <h1>2. Nested properties: Country profile</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>
+      <p>{{country.name}} is a {{country.climate.temperature}} country with {{country.climate.rainfall}} rainfall and a population of {{country.population}}.</p>
+
+      <p>The capital city is {{country.capital.name}} 
+        (<a href='https://maps.google.co.uk/maps/place/{{country.capital.name}}/@{{country.capital.lat}},{{country.capital.lon}},12z' target='_blank'>see map</a>).
+      </p>
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+
+    var ractive = new Ractive({
+
+      el: '#container',
+      template: '#template',
+
+      data: {
+          country: {
+            name: 'The UK',
+            climate: { temperature: 'cold', rainfall: 'excessive' },
+            population: 63230000,
+            capital: { name: 'London', lat: 51.5171, lon: -0.1062 }
+          }
+        }
+
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Some comment
+HelloWorld:
+  integer: 100
+  bool: false
+  string: 'some string'
+
+
+# Adapters
+BentleySkip:
+  - repo1
+  - repo2
+  - repo3

@@ -1,0 +1,62 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 3.1</title>
+</head>
+
+<body>
+  <h1>3. Expressions</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>
+    <table>
+      <tr>
+        <th>Price per {{item}}</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+
+      <tr>
+        <td>{{ format(price) }}</td>
+        <td>{{quantity}}</td>
+        <td>{{ format( price * quantity ) }}</td>
+      </tr>
+    </table>
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+
+    var ractive = new Ractive({
+
+      el: '#container',
+      template: '#template',
+
+      data: {
+        item: 'pint of milk',
+        price: 0.49,
+        quantity: 5,
+        format: function ( num ) {
+          if ( num < 1 ) return ( 100 * num ) + 'p';
+          return '£' + num.toFixed( 2 );
+        }
+      }
+
+    });
+    
+/*
+
+ractive.set({
+  item: 'banana',
+  price: 0.19,
+  quantity: 7
+});
+
+*/
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ractive - Module Pattern</title>
+	</head>
+
+	<body>
+	  <div id='container'></div>
+
+	  <script id='template' type='text/ractive'>
+	      <button on-click='activate'>Activate!</button>
+	      <button on-click='deactivate'>Deactivate!</button>
+	  </script>
+	</body>
+
+	<script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	
+	<script>
+	$(document).ready(function() {
+
+		var ractive = new Ractive({
+	      el: '#container',
+	      template: '#template'
+	    });
+     
+		var MyModule = ( function( window, undefined ) {
+	  
+		  function myMethod() {
+		    ractive.on({
+		      activate: function () {
+		        alert( 'Activating!' );
+		      },
+		      deactivate: function () {
+		        alert( 'Deactivating!' );
+		      }
+	   		 });
+		  }
+	 
+	  
+	  // explicitly return public methods when this object is instantiated
+	  return {
+	    someMethod : myMethod
+	  };
+	  
+	} )( window );
+	 
+
+	MyModule.someMethod();
+});
+	</script>
+	<style>
+	</style>
+</html>

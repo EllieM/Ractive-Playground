@@ -1,0 +1,48 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 9</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style scoped>
+  </style>
+</head>
+
+<body>
+  <h1>9. Two-way bindings</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>     
+      <label>
+        Enter your name:
+        <input value='{{name}}'>
+      </label>
+
+      <p>Hello, {{name}}!</p>
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+    // (function(){
+
+      var ractive = new Ractive({
+          el: '#container',
+          template: '#template',
+      });
+
+    // })();
+
+    /*
+        comments...
+        
+    ractive.observe( 'name', function ( newValue, oldValue ) {
+      doSomethingWith( newValue );
+    });
+
+    */
+  </script>
+
+</body>
+</html>

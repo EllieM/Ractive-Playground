@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 5</title>
+</head>
+
+<body>
+  <h1>5. Conditional sections</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>     
+    {{#if signedIn}}
+      <p>Welcome back, {{username}}!</p>
+    {{/if}}
+
+    {{#if notSignedIn}}
+      <p>Hi there! Please <a href='javascript:void(0);' class='button' on-click='signIn'>sign in</a></p>
+    {{/if}}
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+
+    var ractive = new Ractive({
+      el: '#container',
+      template: '#template',
+
+      data: {
+        signedIn: false,
+        notSignedIn: true
+      }
+    });
+
+    ractive.on( 'signIn', function () {
+      var name = prompt( 'Enter your username to sign in', 'ractive_fan' );
+
+      ractive.set({
+        username: name,
+        signedIn: true,
+        notSignedIn: false
+      });
+    });
+
+    /*
+
+Often, you want to show or hide part of your view depending on whether a particular condition is met. For example you might want to show a slightly different view to users depending on whether they're signed in or not.
+
+All we need to do is hide the 'please sign in' message when we're signed in, and the 'welcome back!' message when we're not.
+    */
+  </script>
+
+</body>
+</html>

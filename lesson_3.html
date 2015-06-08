@@ -1,0 +1,52 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 3</title>
+</head>
+
+<body>
+  <h1>3. Expressions</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>
+      <p>The population of {{country}} is {{ format(population) }}.</p>
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+
+    var ractive = new Ractive({
+
+      el: '#container',
+      template: '#template',
+
+      data: {
+        country: 'the UK',
+        population: 63230000,
+
+        format: function ( num ) {
+          if ( num > 1000000000 ) return ( num / 1000000000 ).toFixed( 1 ) + ' billion';
+          if ( num > 1000000 ) return ( num / 1000000 ).toFixed( 1 ) + ' million';
+          if ( num > 1000 ) return ( Math.floor( num / 1000 ) ) + ',' + ( num % 1000 );
+          return num;
+        }
+      }
+
+    });
+    
+/*
+
+ractive.set({
+  country: 'China',
+  population: 1351000000
+});
+
+
+*/
+
+
+  </script>
+</body>
+</html>

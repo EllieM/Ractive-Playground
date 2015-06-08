@@ -1,0 +1,64 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 2.1</title>
+</head>
+
+<body>
+  <h1>2. Nested properties: Country profile</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>
+      {{#with country}}
+        <p>{{name}} is a {{climate.temperature}} country with {{climate.rainfall}} rainfall and a population of {{population}}.</p>
+
+        {{#with capital}}
+          <p>The capital city is {{name}} (<a href='https://maps.google.co.uk/maps/place/{{name}}/@{{lat}},{{lon}},12z' target='_blank'>see map</a>).</p>
+        {{/with}}
+
+      {{/with}}
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+
+    var ractive = new Ractive({
+
+      el: '#container',
+      template: '#template',
+
+      data: {
+          country: {
+            name: 'The UK',
+            climate: { temperature: 'cold', rainfall: 'excessive' },
+            population: 63230000,
+            capital: { name: 'London', lat: 51.5171, lon: -0.1062 }
+          }
+        }
+
+    });
+
+    // Let's say we want to update a nested property. If we'd stored a reference to our model object, we could do it like this:
+
+
+    /*
+    
+    // we didn't store a reference, so let's do it now
+    var country = ractive.get('country');
+
+    country.climate.rainfall = 'very high';
+    ractive.update('country');    
+
+    
+    // But there's an easier way to do it:
+    ractive.set('country.climate.rainfall', 'too much');
+
+    */
+
+
+
+  </script>
+</body>
+</html>

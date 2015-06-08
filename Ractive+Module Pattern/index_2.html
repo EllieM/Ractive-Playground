@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ractive - Module Pattern</title>
+	</head>
+
+	<body>
+	  <div id='container'></div>
+
+	  <script id='template' type='text/ractive'>
+	      <p>Use <kbd>Shift</kbd> and <kbd>{{meta}}</kbd> to select multiple options:</p>
+
+			<select value='{{selectedColors}}' multiple>
+			  {{#each colors}}
+			    <option>{{this}}</option>
+			  {{/each}}
+			</select>
+
+			{{#if selectedColors.length}}
+			  <p>The selected colours are:</p>
+			  <ul>
+			    {{#each selectedColors}}
+			      <li style='background-color: {{this}};'>{{this}}</li>
+			    {{/each}}
+			  </ul>
+			{{else}}
+			  <p>No colours are selected.</p>
+			{{/if}}
+	  </script>
+	</body>
+
+	<script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	
+	<script>
+	$(document).ready(function() {
+
+		var colors = [ 'red', 'green', 'blue', 'purple' ];
+     
+		var MyModule = ( function( window ) {
+	  
+		  function myMethod() {
+		     var ractive = new Ractive({
+		      el: '#container',
+		      template: '#template',
+		      data: {
+			    colors: colors,
+			    meta: /Mac/.test(navigator.appVersion) ? 'Cmd' : 'Ctrl'
+			  }
+		    });
+		  }
+	 
+	  
+	  // explicitly return public methods when this object is instantiated
+	  return {
+	    someMethod : myMethod
+	  };
+	  
+	} )( window );
+	 
+
+	MyModule.someMethod();
+});
+	</script>
+	<style>
+	</style>
+</html>

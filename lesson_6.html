@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 6</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <style scoped>
+    .superheroes {
+      border-spacing: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>6. List sections</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>     
+    <table class='table superheroes'>
+      <tr>
+        <th>Superhero name</th>
+        <th>Real name</th>
+        <th>Superpower</th>
+      </tr>
+
+      {{#each superheroes}}
+        <tr>
+          <td><a href='{{info}}'>{{name}}</a></td>
+          <td>{{realname}}</td>
+          <td>{{power}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+    var ractive;
+
+    // (function(){
+
+        var xmen;
+
+        // define our superheroes
+        xmen = [
+          { name: 'Nightcrawler', realname: 'Wagner, Kurt',     power: 'Teleportation',    info: 'http://www.superherodb.com/Nightcrawler/10-107/' },
+          { name: 'Cyclops',      realname: 'Summers, Scott',   power: 'Optic blast',      info: 'http://www.superherodb.com/Cyclops/10-50/' },
+          { name: 'Rogue',        realname: 'Marie, Anna',      power: 'Absorbing powers', info: 'http://www.superherodb.com/Rogue/10-831/' },
+          { name: 'Wolverine',    realname: 'Howlett, James',   power: 'Regeneration',     info: 'http://www.superherodb.com/Wolverine/10-161/' }
+        ];
+
+        var ractive = new Ractive({
+          el: '#container',
+          template: '#template',
+
+          data: { superheroes: xmen }
+        });
+
+    // })();
+
+    /*
+      // You can use array notation to update the data:
+      ractive.set( 'superheroes[1].power', 'Martial arts' );
+
+      // Or, you can use dot notation. Whichever you prefer:
+      ractive.set( 'superheroes.3.power', 'Enhanced senses' );
+    */
+  </script>
+
+</body>
+</html>

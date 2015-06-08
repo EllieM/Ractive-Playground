@@ -1,0 +1,63 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 4</title>
+</head>
+
+<body>
+  <h1>4. Event proxies</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>
+      <button on-click='activate'>Activate!</button>
+      <button on-click='deactivate'>Deactivate!</button>
+      <button on-click='silence'>Silence!</button>
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+
+    var ractive = new Ractive({
+      el: '#container',
+      template: '#template'
+    });
+    
+    listener = ractive.on({
+      activate: function () {
+        alert( 'Activating!' );
+      },
+      deactivate: function () {
+        alert( 'Deactivating!' );
+      },
+      silence: function () {
+        alert( 'No more alerts!' );
+        listener.cancel();
+      }
+    });
+
+    /*
+
+There are a couple of ways to unsubscribe from events. If you've used jQuery, you'll be used to this syntax:
+
+ractive.on( 'select', selectHandler );
+
+// later...
+ractive.off( 'select', selectHandler );
+
+
+That's fine, as long as you stored a reference to selectHandler (i.e. you didn't just use an anonymous function). If you didn't, you can also do this:
+
+// remove ALL 'select' handlers
+ractive.off( 'select' );
+
+// remove all handlers of ANY type
+ractive.off();
+
+
+    */
+  </script>
+
+</body>
+</html>

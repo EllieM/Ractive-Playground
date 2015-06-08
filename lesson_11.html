@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <title>Lesson 11</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style scoped>
+  </style>
+</head>
+
+<body>
+  <h1>11. Animation</h1>
+
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>     
+      <p>Use <kbd>Shift</kbd> and <kbd>{{meta}}</kbd> to select multiple options:</p>
+
+      <select value='{{selectedColors}}' multiple>
+        {{#each colors}}
+          <option>{{this}}</option>
+        {{/each}}
+      </select>
+
+      {{#if selectedColors.length}}
+        <p>The selected colours are:</p>
+        <ul>
+          {{#each selectedColors}}
+            <li style='background-color: {{this}};'>{{this}}</li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>No colours are selected.</p>
+      {{/if}}
+  </script>
+
+  <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+  <script>
+    // (function(){
+
+      var colors = [ 'red', 'green', 'blue', 'purple' ];
+
+      var ractive = new Ractive({
+          el: '#container',
+          template: '#template',
+
+          data: {
+            colors: colors,
+            meta: /Mac/.test(navigator.appVersion) ? 'Cmd' : 'Ctrl'
+          }          
+      });
+
+    // })();
+
+    /*
+        comments...
+        
+    ractive.observe( 'name', function ( newValue, oldValue ) {
+      doSomethingWith( newValue );
+    });
+
+    */
+  </script>
+
+</body>
+</html>
